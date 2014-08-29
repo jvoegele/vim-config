@@ -58,3 +58,13 @@ nnoremap <C-l> <C-w>l
 
 " Convenient access to BufExplorer
 "nnoremap <leader>b :BufExplorer<cr>
+
+if has('gui_running')
+  set background=dark
+  "let g:solarized_contrast = "high"
+  colorscheme solarized
+  "set guifont=Inconsolata:h14
+  set guifont=Menlo:h12
+else
+  set background=dark
+end
