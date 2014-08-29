@@ -8,6 +8,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+"" Programming language and framework support
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+
 "" Color schemes
 Plugin 'altercation/vim-colors-solarized'
 
