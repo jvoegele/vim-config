@@ -8,12 +8,24 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'LustyJuggler'
+Plugin 'LustyExplorer'
+
 "" Programming language and framework support
 Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rbenv'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-endwise'  " wisely add end in Ruby
+Plugin 'elixir-lang/vim-elixir'
 
 "" Color schemes
 Plugin 'altercation/vim-colors-solarized'
+
+Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
+Plugin 'rking/ag.vim'  " The Silver Searcher
+
+Plugin 'shemerey/vim-peepopen'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -44,9 +56,10 @@ set smartcase
 set incsearch
 set showmatch
 
-
 " Space is your Leader!
 let mapleader = "\<Space>"
+
+nnoremap <leader>s :Ag 
 
 " Strip all trailing whitespace.
 " nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
