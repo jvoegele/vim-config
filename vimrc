@@ -17,10 +17,17 @@ Plugin 'tpope/vim-rbenv'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise'  " wisely add end in Ruby
 Plugin 'elixir-lang/vim-elixir'
+"Plugin 'calebsmith/vim-lambdify'
+
+"" Custom text objects
+Plugin 'kana/vim-textobj-user'
+Plugin 'vim-scripts/argtextobj.vim'
+Plugin 'nelstrom/vim-textobj-rubyblock'
 
 "" Color schemes
 Plugin 'altercation/vim-colors-solarized'
 
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'rking/ag.vim'  " The Silver Searcher
@@ -59,6 +66,10 @@ set showmatch
 " Space is your Leader!
 let mapleader = "\<Space>"
 
+autocmd bufwritepost .vimrc source $MYVIMRC  " Auto source $MYVIMRC after save
+" Open $MYVIMRC with <leader>v
+nmap <leader>v :tabedit $MYVIMRC<CR>
+
 nnoremap <leader>s :Ag 
 
 " Strip all trailing whitespace.
@@ -76,9 +87,23 @@ nnoremap <C-l> <C-w>l
 " Convenient access to BufExplorer
 "nnoremap <leader>b :BufExplorer<cr>
 
+
+"" Fugitive config
+autocmd User fugitive 
+  \ if fugitive#buffer().type() =~# '^\%(tree\|blob\)$' |
+  \   nnoremap <buffer> .. :edit %:h<CR> |
+  \ endif
+autocmd BufReadPost fugitive://* set bufhidden=delete
+set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
+
+
+"" Needed by textobj-rubyblock:
+runtime macros/matchit.vim
+
 if has('gui_running')
   set background=dark
   "let g:solarized_contrast = "high"
+  let g:solarized_diffmode="high"
   colorscheme solarized
   "set guifont=Inconsolata:h14
   set guifont=Menlo:h12
