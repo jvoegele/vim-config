@@ -8,6 +8,10 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 
+Plugin 'genutils'
+
+"" File and buffer explorers/managers.
+Plugin 'SelectBuf'
 Plugin 'LustyJuggler'
 Plugin 'LustyExplorer'
 
@@ -16,8 +20,17 @@ Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rbenv'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise'  " wisely add end in Ruby
+Plugin 'ecomba/vim-ruby-refactoring'
+Plugin 'guns/vim-clojure-static'
+" Plugin 'vim-scripts/paredit.vim'
+Plugin 'guns/vim-sexp'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tpope/vim-fireplace'
 Plugin 'elixir-lang/vim-elixir'
-"Plugin 'calebsmith/vim-lambdify'
+Plugin 'calebsmith/vim-lambdify'
+Plugin 'kchmck/vim-coffee-script'
+
+Plugin 'tomtom/tcomment_vim'
 
 "" Custom text objects
 Plugin 'kana/vim-textobj-user'
@@ -27,12 +40,23 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 "" Color schemes
 Plugin 'altercation/vim-colors-solarized'
 
+Plugin 'tpope/vim-repeat'  " enable repeating supported plugin maps with '.'
+Plugin 'tpope/vim-abolish'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-dispatch'
+
+Plugin 'ZoomWin'
+
 Plugin 'rking/ag.vim'  " The Silver Searcher
 
+Plugin 'tpope/vim-vinegar'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimfiler.vim'
+Plugin 'scrooloose/nerdtree'
 Plugin 'shemerey/vim-peepopen'
+Plugin 'rizzatti/dash.vim'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -65,6 +89,7 @@ set showmatch
 
 " Space is your Leader!
 let mapleader = "\<Space>"
+let maplocalleader = "\<Space>"
 
 autocmd bufwritepost .vimrc source $MYVIMRC  " Auto source $MYVIMRC after save
 " Open $MYVIMRC with <leader>v
@@ -75,6 +100,9 @@ nnoremap <leader>s :Ag
 " Strip all trailing whitespace.
 " nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 
+" Clear highlighted search results.
+nnoremap <leader><space> :noh<cr>
+
 " Split window handling
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -84,8 +112,11 @@ nnoremap <C-l> <C-w>l
 " Close buffer without closing window.
 "nmap <C-w>d <Plug>Kwbd
 
+nnoremap <leader>n :NERDTreeToggle<cr>
+
 " Convenient access to BufExplorer
 "nnoremap <leader>b :BufExplorer<cr>
+nmap <leader>b <Plug>SelectBuf
 
 
 "" Fugitive config
@@ -96,6 +127,11 @@ autocmd User fugitive
 autocmd BufReadPost fugitive://* set bufhidden=delete
 set statusline=%<%f\ %h%m%r%{fugitive#statusline()}%=%-14.(%l,%c%V%)\ %P
 
+"" Always-on rainbow parentheses
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
 "" Needed by textobj-rubyblock:
 runtime macros/matchit.vim
