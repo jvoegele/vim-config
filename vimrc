@@ -27,14 +27,15 @@ Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'genutils'
 
 "" File and buffer explorers/managers.
-Plugin 'bufexplorer.zip'
+" Plugin 'bufexplorer.zip'
 " Plugin 'SelectBuf'
-" Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'jeetsukumaran/vim-buffergator'
 " Plugin 'kien/ctrlp.vim'
 Plugin 'junegunn/fzf'
 Plugin 'junegunn/fzf.vim'
 " Plugin 'LustyJuggler'
 " Plugin 'LustyExplorer'
+Plugin 'rbgrouleff/bclose.vim'
 
 "" Programming language and framework support
 Plugin 'tpope/vim-projectionist'
@@ -66,6 +67,8 @@ Plugin 'calebsmith/vim-lambdify'
 " Plugin 'wlangstroth/vim-racket'
 " Plugin 'jparise/vim-graphql'
 Plugin 'pangloss/vim-javascript'
+Plugin 'leafgarland/typescript-vim'
+Plugin 'maxmellon/vim-jsx-pretty'
 Plugin 'maksimr/vim-jsbeautify'
 
 " Plugin 'tomtom/tcomment_vim'
@@ -82,6 +85,7 @@ Plugin 'JamshedVesuna/vim-markdown-preview'
 "" Custom text objects
 Plugin 'kana/vim-textobj-user'
 Plugin 'vim-scripts/argtextobj.vim'
+Plugin 'PeterRincker/vim-argumentative'
 
 "" Color schemes
 Plugin 'altercation/vim-colors-solarized'
@@ -296,10 +300,10 @@ let vim_markdown_preview_hotkey='<C-m>'
 let vim_markdown_preview_github=1
 " let g:deoplete#enable_at_startup = 1
 
-" let g:qfenter_keymap.open = ['<CR>', '<2-LeftMouse>']
-" let g:qfenter_keymap.vopen = ['<Leader><CR>', '<C-v>']
-" let g:qfenter_keymap.hopen = ['<Leader><Space>', '<C-x>']
-" let g:qfenter_keymap.topen = ['<Leader><Tab>', '<C-t>']
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
 
 let g:ale_enabled = 0
 " let g:ale_elixir_elixir_ls_release = '/Users/jvoegele/local/elixir-ls'
@@ -319,11 +323,13 @@ if has('nvim')
   tnoremap <C-l><Esc> <Esc>
   set t_Co=256
   set termguicolors
+  highlight! link TermCursor Cursor
+  highlight! TermCursorNC guibg=red guifg=white ctermbg=1 ctermfg=15
 endif
 
 if has('gui_running')
-  set macligatures
-  set guifont=Fira\ Code:h14
+  " set macligatures
+  set guifont=Fira\ Code:h13
   " set guifont=Source\ Code\ Pro:h14
   " set background=dark
   " colorscheme PaperColor
